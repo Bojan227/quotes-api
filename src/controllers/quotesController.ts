@@ -2,8 +2,10 @@ import { Request, Response } from 'express';
 import quotesDB from '../db/index';
 
 export async function getQuotes(request: Request, response: Response) {
+  const { page } = request.query;
+
   try {
-    const quotes = await quotesDB.getQuotes();
+    const quotes = await quotesDB.getQuotes(Number(page));
 
     response.status(200).json(quotes);
   } catch (error) {

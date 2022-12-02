@@ -27,10 +27,16 @@ async function generateQuotes() {
   }
 }
 
-async function getQuotes() {
+async function getQuotes(page: number) {
   const db = await makeDb();
-  return await db.collection('quotes').find({}).toArray();
+  return await db
+    .collection('quotes')
+    .find({})
+    .skip(page * 10)
+    .limit(10)
+    .toArray();
 }
+
 async function getRandomQuote() {
   const db = await makeDb();
   return await db
