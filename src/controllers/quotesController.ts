@@ -8,7 +8,9 @@ export async function getQuotes(request: Request, response: Response) {
     const quotes = await quotesDB.getQuotes(Number(page));
     response.status(200).json(quotes);
   } catch (error) {
-    response.status(404).json(error);
+    response.status(404).json({
+      error: 'Cannot find any quotes.Please try refreshing your page',
+    });
   }
 }
 
@@ -18,7 +20,9 @@ export async function getRandomQuote(request: Request, response: Response) {
 
     response.status(200).json(quote);
   } catch (error) {
-    response.status(404).json(error);
+    response.status(404).json({
+      error: 'Failed to find random quote. Please try refreshing your page',
+    });
   }
 }
 
@@ -30,8 +34,8 @@ export async function generateNewQuotes(request: Request, response: Response) {
       .status(200)
       .json({ page: 0, message: 'Successfully generated new quotes' });
   } catch (error) {
-    response
-      .status(404)
-      .json({ error: 'Failed to generate new quotes. Try again' });
+    response.status(404).json({
+      error: 'Failed to generate new quotes. We are working on the problem',
+    });
   }
 }
