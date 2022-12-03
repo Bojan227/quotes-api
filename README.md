@@ -3,11 +3,11 @@
 ##  Running Locally
 
 ##  Prerequisites
-
+```
 Git
 Node JS
 Mongo DB
-
+```
 ##  1. Clone the repo and install dependencies
 ```
 git clone 
