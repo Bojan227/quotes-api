@@ -1,0 +1,2 @@
+MONGO_URI=Your mongo atlas connection string
+PORT=300
