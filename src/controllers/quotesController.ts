@@ -28,11 +28,11 @@ export async function getRandomQuote(request: Request, response: Response) {
 
 export async function generateNewQuotes(request: Request, response: Response) {
   try {
-    await quotesDB.generateQuotes();
+    const newQuotes = await quotesDB.generateQuotes();
 
     response
       .status(200)
-      .json({ page: 0, message: 'Successfully generated new quotes' });
+      .json({ newQuotes, message: 'Successfully generated new quotes' });
   } catch (error) {
     response.status(404).json({
       error: 'Failed to generate new quotes. We are working on the problem',
