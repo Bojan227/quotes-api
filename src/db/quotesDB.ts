@@ -13,15 +13,21 @@ async function generateQuotes() {
   try {
     const db = await makeDb();
     const collection = db.collection('quotes');
-    if (collection) {
+
+    const collections = await db.listCollections().toArray();
+    const collectionNames = collections.map((c) => c.name);
+
+    if (collectionNames.length !== 0) {
       collection.drop();
     }
+
     const quotes = await fetchQuotes();
 
     if (quotes) {
       collection.insertMany(quotes.data);
     }
     console.log('Database seeded! :)');
+    return quotes.data.slice(0, 10);
   } catch (error) {
     console.log(error);
   }
